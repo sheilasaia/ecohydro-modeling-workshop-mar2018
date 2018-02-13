@@ -39,6 +39,8 @@ According to the [RStudio Data Wrangling Cheatsheet...](https://www.rstudio.com/
 
 ![](images/tidy_data.jpg)
 
+Open up the `output.rch` file in your favorite text editor. How is it organized? Is it tidy? Why or why not?
+
 
 
 
