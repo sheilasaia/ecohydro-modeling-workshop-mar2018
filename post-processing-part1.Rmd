@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Overview
+## 1. Overview
 
 Now that we have done all this work to set-up, clibrate, and validate SWAT, we can explore our results. However, before we jump into data analysis, there are a few things we need to do. First, we need to make sure  we understand the purpose of each of the 10 SWAT output files. Next, we might want to reformat these raw SWAT output files so they are easier to work with (i.e., tidy them up). Last, we have to save these reformatted outputs so we can use them for data analysis. This act of taking raw SWAT outputs, reformatting them, and saving this reformatted version is called *post-processing*.
 
@@ -17,23 +17,49 @@ By the end of this workshop session you will be able to:
 
 1. *explain* different SWAT output files and their contents
 
-2. *describe* key tidy data principles
+2. *identify* key features of RStudio
+
+3. *describe* key tidy data principles
 
 
-## SWAT Output Files
+## 2. SWAT Output Files
 
 Activity 1:
 
-1. Navigate to the `TxtInOut` directory on your computer (C drive > SWAT > SWATRuns > XXXX > Scenarios > Default > TxtInOut) and, using the search bar, type in 'output'. Pull out a piece of paper and jot down the names of the 10 different plain text files you see (hint: they should differ only by their file extensions).
+1. Navigate to the `TxtInOut` directory on your computer (C drive > SWAT > SWATRuns > <your SWAT project name > Scenarios > Default > TxtInOut) and, using the search bar, type in 'output'. Pull out a piece of paper and jot down the names of the different plain text files you see that start with 'output' (hint: they should only differ by their file extensions).
 
-2. *(5 min on your own)* Now that you have a list of the 10 files, head over to chapter 32 of the SWAT help manual here: http://swat.tamu.edu/media/69395/ch32_output.pdf. Read through the SWAT documentaiton and jot down a short summary of the informaiton contained in each file you listed in #1.
+2. *(5 min on your own)* Now that you have a list of the output.* files, head over to chapter 32 of the SWAT help manual here: http://swat.tamu.edu/media/69395/ch32_output.pdf. Read through the SWAT documentaiton and jot down a short summary of the informaiton contained in each file you listed in #1.
 
 3. *(5 min with a partner)* Share what you found with a partner.
 
 4. *(5 min class discussion)* Share what you and your partner found with the class.
 
 
-## What is tidy data?
+## 3. Tour of RStudio
+
+RStudio is an integrated development environment (IDE) for R that you can install only after you've installed R. Basically, RStudio makes coding in R easier. There are some aspects of RStudio we'll explore now.
+
+* Editor window (for viewing and running scripts)
+* Console window (for viewing outputs/code errors)
+* Environment window (see variables in memory and history)
+* File direcory window (see file path and plots, ask for help)
+
+
+
+```{r, looking and setting directories}
+
+# check what working directory you are in
+getwd()
+
+# set your working directory
+setwd('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/ecohydrology-modeling-workshop-mar2018/data')
+# copy/paste the path to the data directory inside the function setwd()
+# windows users may have to change /'s to \\'s when copy/pasting
+
+```
+
+
+## 4. What is tidy data?
 
 According to the [RStudio Data Wrangling Cheatsheet...](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
