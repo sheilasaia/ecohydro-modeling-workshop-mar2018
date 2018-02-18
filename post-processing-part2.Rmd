@@ -1,0 +1,75 @@
+---
+title: "SWAT Output Post-Processing (Part 2)"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Overview
+
+In post-processing part 1, we were introduced to the different SWAT output files, learned about tidy data concepts, and started importing SWAT outputs into R/RStudio. Here we will learn how to plot these data in ways that are helpful to our research.
+
+By the end of this workshop session you will be able to:
+
+1. *describe* common figures for exploring and publishing SWAT results
+
+2. *modify* R code to import and plot SWAT data
+
+
+## 2. Importing Data
+
+First set your working directory as we did in post-processing part 1.
+
+```{r set path, eval = FALSE, echo = TRUE}
+
+setwd('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data')
+# copy/paste the path to the data directory inside the function setwd()
+# windows users may have to change /'s to \\'s when copy/pasting
+
+```
+
+Next let's load our package.
+
+```{r loading packages, results=FALSE, message = FALSE, warning=FALSE}
+
+library(tidyverse) # do this each time you open a new script and need it
+
+```
+
+Now let's import the raw `output.rch` file. Note the extra funciton options we're including here: 
+
+```{r import raw data, results = FALSE, echo = TRUE, message = FALSE, warning=FALSE}
+
+# You will need to change what's between the 's here. It should be output.rch.
+rch_data_raw = read_table2('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch', col_names=FALSE, skip=9)
+
+```
+
+Let's look at the data? What's different about it from the first time we tried importing it?
+
+``` {r show raw data}
+
+head(rch_data_raw, n = 20)
+
+```
+
+Ok, let's reformat these raw data a little more using the `reformat_monthly_rch_file()` function.
+
+```{r reformat raw data}
+
+source('reformat_monthly_rch_file.R') # add the reformat_rch_file() function to our working environment
+
+rch_data = reformat_monthly_rch_file(rch_data_raw)
+
+```
+
+
+
+Activity 1:
+
+
+
