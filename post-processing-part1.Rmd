@@ -1,6 +1,8 @@
 ---
 title: "SWAT Output Post-Processing (Part 1)"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -9,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Overview
 
-Now that we have done all this work to set-up, clibrate, and validate SWAT, we can explore our results. However, before we jump into data analysis, there are a few things we need to do. First, we need to make sure  we understand the purpose of each of the 10 SWAT output files. Next, we might want to reformat these raw SWAT output files so they are easier to work with (i.e., tidy them up). Last, we have to save these reformatted outputs so we can use them for data analysis. This act of taking raw SWAT outputs, reformatting them, and saving this reformatted version is called *post-processing*.
+Now that we have done all this work to set-up, calibrate, and validate SWAT, we can explore our results. However, before we jump into data analysis, there are a few things we need to do. First, we need to make sure  we understand the purpose of each of the 10 SWAT output files. Next, we might want to reformat these raw SWAT output files so they are easier to work with (i.e., tidy them up). Last, we have to save these reformatted outputs so we can use them for data analysis. This act of taking raw SWAT outputs, reformatting them, and saving this reformatted version is called *post-processing*.
 
 The overall goal of this workshop session is to provide you with some tools to make your post-processing of SWAT outputs easy and reproducible.
 
@@ -78,17 +80,17 @@ Let's try to import some of our SWAT data into R/RStudio.
 
 First we use `library()` to load the `tidyverse` package that has functions to help us import our data.
 
-```{r, loading packages, results=FALSE, message = FALSE, warning=FALSE}
+```{r loading packages, results=FALSE, message = FALSE, warning=FALSE}
 
 # install and load some packages with functions that we'll need
-#install.packages("tidyverse")
-library(tidyverse)
+install.packages("tidyverse") # only do this once!
+library(tidyverse) # do this each time you open a new script and need it
 
 ```
 
 Next we check where RStudio is currently looking for our data.
 
-```{r, looking at current path}
+```{r looking at current path}
 # check what working directory you are in
 getwd()
 
@@ -96,7 +98,7 @@ getwd()
 
 You will need to use the code below to set your working directory to point to the directory where the `output.rch` file is stored.
 
-```{r, set path, eval = FALSE, echo = TRUE}
+```{r set path, eval = FALSE, echo = TRUE}
 
 setwd('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data')
 # copy/paste the path to the data directory inside the function setwd()
@@ -106,7 +108,7 @@ setwd('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swa
 
 Now let's import the `output.rch` file.
 
-```{r, import raw data}
+```{r import raw data}
 
 # You will need to change what's between the 's here. It should be output.rch.
 rch_data_raw = read_table('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch')
@@ -115,7 +117,7 @@ rch_data_raw = read_table('/Users/ssaia/Documents/GitHub/ecohydro-modeling-works
 
 Now let's look at it. You can click on it in the Environment window, or type `View(rch_data_raw)` into the Console window You can also use `head()` like this to view the first 20 lines...
 
-```{r, look at data}
+```{r look at data}
 
 head(rch_data_raw, n = 20)
 
@@ -126,3 +128,4 @@ Hmm...it's coming in as one big column. Why do you think this is happening here?
 ![](http://www.doctorwhotv.co.uk/wp-content/uploads/to-be-continued-series-8.jpg)
 
 (Image credit: http://www.doctorwhotv.co.uk/)
+
