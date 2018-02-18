@@ -121,7 +121,7 @@ head(rch_data_raw, n = 20)
 
 ```
 
-Hmm...it's coming in as one big column. Why do you think this is happening here? We might have to do some reformatting...
+Hmm...it's coming in as one big column. Why do you think this is happening here? (Hint: Think back to our tidy data critique of the file.) We might have to do some reformatting...
 
 ![](http://www.doctorwhotv.co.uk/wp-content/uploads/to-be-continued-series-8.jpg)
 
