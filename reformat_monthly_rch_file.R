@@ -1,11 +1,10 @@
-# reformat_rch_file function
+# reformat_montly_rch_file function
 
-# purpose: prepare SWAT .rch file for analysis
+# purpose: prepare monthly SWAT .rch file for analysis
 # last updated: 2018218
 # author: sheila saia
 # contact: ssaia [at] ncsu [dot] edu
 
-# reformat SWAT, raw .rch file for other analyses
 reformat_monthly_rch_file=function(raw_rch_data) {
   # import monthly raw_rch_data into R session using: 
   # raw_rch_data_raw=read_table2("output.rch", col_names=FALSE, skip=9)
@@ -29,7 +28,7 @@ reformat_monthly_rch_file=function(raw_rch_data) {
   
   # remove unnecessary columns
   rch_data = raw_rch_data %>% 
-    select(rch, month:flow_out_cms)
+    select(rch, month:wtmp_deg_c)
   
   return(rch_data)
 }
