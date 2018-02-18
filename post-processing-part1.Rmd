@@ -1,8 +1,8 @@
 ---
 title: "SWAT Output Post-Processing (Part 1)"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -49,7 +49,7 @@ RStudio is an integrated development environment (IDE) for `R` that you can inst
 
 ## 4. What is tidy data?
 
-According to the [RStudio Data Wrangling Cheatsheet...](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+According to the [RStudio Data Wrangling Cheatsheet (click for link)...](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
 ![](images/tidy_data.jpg)
 
@@ -108,7 +108,7 @@ setwd('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swa
 
 Now let's import the `output.rch` file.
 
-```{r import raw data}
+```{r import raw data, results = FALSE, echo = TRUE, message = FALSE}
 
 # You will need to change what's between the 's here. It should be output.rch.
 rch_data_raw = read_table('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch')
@@ -125,7 +125,9 @@ head(rch_data_raw, n = 20)
 
 Hmm...it's coming in as one big column. Why do you think this is happening here? (Hint: Think back to our tidy data critique of the file.) We might have to do some reformatting...
 
-![](http://www.doctorwhotv.co.uk/wp-content/uploads/to-be-continued-series-8.jpg)
+![](images/tbc.jpg)
+
 
 (Image credit: http://www.doctorwhotv.co.uk/)
+
 
