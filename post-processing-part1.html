@@ -167,6 +167,7 @@ $(document).ready(function () {
 <li>Clear units are given</li>
 <li>Clear representation of missing data</li>
 <li>Metadata is included</li>
+<li>No spaces in column names (R only likes .’s, _’s, or -’s, e.g. temp_deg_c for temperature in degrees C)</li>
 <li>Anything else?</li>
 </ul>
 <p>Activity 2:</p>
@@ -179,7 +180,7 @@ $(document).ready(function () {
 <div id="importing-data-into-rrstudio" class="section level2">
 <h2>5. Importing Data into R/RStudio</h2>
 <p>Let’s try to import some of our SWAT data into R/RStudio.</p>
-<p>First we use <code>library()</code> to load the <code>tidyverse</code> package that has functions to help us import our data.</p>
+<p>First we use <code>library()</code> to load the <code>tidyverse</code> package that has functions to help us import our data. If you’re interested in learning more about the <code>tidyverse</code> package, which includes a whole happy family of other awesome packages, you can read more here: <a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>.</p>
 <pre class="r"><code># install and load some packages with functions that we'll need
 install.packages(&quot;tidyverse&quot;) # only do this once!
 library(tidyverse) # do this each time you open a new script and need it</code></pre>
@@ -193,9 +194,9 @@ getwd()</code></pre>
 # windows users may have to change /'s to \\'s when copy/pasting</code></pre>
 <p>Now let’s import the <code>output.rch</code> file.</p>
 <pre class="r"><code># You will need to change what's between the 's here. It should be output.rch.
-rch_data_raw = read_table('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch')</code></pre>
-<p>Now let’s look at it. You can click on it in the Environment window, or type <code>View(rch_data_raw)</code> into the Console window You can also use <code>head()</code> like this to view the first 20 lines…</p>
-<pre class="r"><code>head(rch_data_raw, n = 20)</code></pre>
+raw_rch_data = read_table('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch')</code></pre>
+<p>Now let’s look at it. You can click on it in the Environment window, or type <code>View(raw_rch_dat)</code> into the Console window You can also use <code>head()</code> like this to view the first 20 lines…</p>
+<pre class="r"><code>head(raw_rch_data, n = 20)</code></pre>
 <pre><code>## # A tibble: 20 x 1
 ##                                                              `1`
 ##                                                            &lt;chr&gt;

@@ -30,7 +30,7 @@ Activity 1:
 
 1. Navigate to the `TxtInOut` directory on your computer (C drive > SWAT > SWATRuns > <your SWAT project name > Scenarios > Default > TxtInOut) and, using the search bar, type in 'output'. Pull out a piece of paper and jot down the names of the different plain text files you see that start with 'output' (hint: they should only differ by their file extensions).
 
-2. *(5 min on your own)* Now that you have a list of the output.* files, head over to chapter 32 of the SWAT help manual here: http://swat.tamu.edu/media/69395/ch32_output.pdf. Read through the SWAT documentaiton and jot down a short summary of the informaiton contained in each file you listed in #1.
+2. *(5 min on your own)* Now that you have a list of the output.* files, head over to chapter 32 of the SWAT help manual here: http://swat.tamu.edu/media/69395/ch32_output.pdf. Read through the SWAT documentation and jot down a short summary of the information contained in each file you listed in #1.
 
 3. *(5 min with a partner)* Share what you found with a partner.
 
@@ -41,10 +41,10 @@ Activity 1:
 
 RStudio is an integrated development environment (IDE) for `R` that you can install only after you've installed `R`. Basically, RStudio makes coding in `R` easier. There are some aspects of RStudio we'll explore now.
 
-* Editor window (for viewing and running scripts)
-* Console window (for viewing outputs/code errors)
-* Environment window (see variables in memory and history)
-* File direcory window (see file path and plots, ask for help)
+* Editor window (view and run scripts)
+* Console window (view outputs/code errors)
+* Environment window (see variables in memory and view history)
+* File directory/Plot/Help window (see file path, see plots, ask for help)
 
 
 ## 4. What is tidy data?
@@ -62,6 +62,7 @@ There are other key features that make data easier for others to use:
 * Clear units are given
 * Clear representation of missing data
 * Metadata is included
+* No spaces in column names (R only likes .'s, _'s, or -'s, e.g. temp_deg_c for temperature in degrees C)
 * Anything else?
 
 
@@ -78,7 +79,7 @@ Activity 2:
 
 Let's try to import some of our SWAT data into R/RStudio.
 
-First we use `library()` to load the `tidyverse` package that has functions to help us import our data.
+First we use `library()` to load the `tidyverse` package that has functions to help us import our data. If you're interested in learning more about the `tidyverse` package, which includes a whole happy family of other awesome packages, you can read more here: https://www.tidyverse.org/.
 
 ```{r loading packages, results=FALSE, message = FALSE, warning=FALSE}
 
@@ -111,15 +112,15 @@ Now let's import the `output.rch` file.
 ```{r import raw data, results = FALSE, echo = TRUE, message = FALSE}
 
 # You will need to change what's between the 's here. It should be output.rch.
-rch_data_raw = read_table('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch')
+raw_rch_data = read_table('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch')
 
 ```
 
-Now let's look at it. You can click on it in the Environment window, or type `View(rch_data_raw)` into the Console window You can also use `head()` like this to view the first 20 lines...
+Now let's look at it. You can click on it in the Environment window, or type `View(raw_rch_dat)` into the Console window You can also use `head()` like this to view the first 20 lines...
 
 ```{r look at data}
 
-head(rch_data_raw, n = 20)
+head(raw_rch_data, n = 20)
 
 ```
 
