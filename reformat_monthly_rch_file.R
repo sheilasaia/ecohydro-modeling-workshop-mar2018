@@ -25,10 +25,34 @@ reformat_monthly_rch_file=function(raw_rch_data) {
   
   # reassign column names
   colnames(raw_rch_data) = rch_col_names
+    
+  # label summary columns
+  num_years = length(na.omit(unique(raw_rch_data$month)))-12
+  rch_data_temp = raw_rch_data %>% 
+    select(rch, month:wtmp_deg_c) %>%
+    mutate(notes = if_else(month > 12,"summary","not_summary"), year = NA) %>%
+    filter(month != (num_years)) # remove annual summary for each subbasin
   
-  # remove unnecessary columns
-  rch_data = raw_rch_data %>% 
-    select(rch, month:wtmp_deg_c)
+  # for loop to go through rows and pull out years
+  num_subs = max(unique(rch_data_temp$rch))
+  num_months = 12
+  num_per_month = num_subs * num_months
+  sim_years = rch_data_temp %>% 
+    select(month) %>% 
+    distinct() %>% 
+    filter(month > 12)
+  str = 1
+  end = num_per_month
+  for (i in 1:length(sim_years$month)) {
+    rch_data_temp$year[str:end] = sim_years$month[i]
+    str = end + num_subs + 1
+    end = str + num_per_month - 1
+  }
+  
+  # final file
+  rch_data = rch_data_temp %>% 
+    filter(notes == "not_summary") %>%
+    select(rch, month, year, area_km2:wtmp_deg_c)
   
   return(rch_data)
 }
