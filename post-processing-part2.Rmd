@@ -104,7 +104,7 @@ Activity 1:
 
 (5 min)
 
-Example 1 - Plot outlet simulation data by month.
+Example 1 - Plot outlet simulation discharge data by month.
 ```{r}
 
 # select only outlet discharge data

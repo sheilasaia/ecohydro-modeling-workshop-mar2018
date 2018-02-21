@@ -230,7 +230,7 @@ rch_data &lt;- reformat_monthly_rch_file(raw_rch_data)</code></pre>
 <div id="plotting-swat-outputs" class="section level2">
 <h2>Plotting SWAT Outputs</h2>
 <p>(5 min)</p>
-<p>Example 1 - Plot outlet simulation data by month.</p>
+<p>Example 1 - Plot outlet simulation discharge data by month.</p>
 <pre class="r"><code># select only outlet discharge data
 sim_outlet_rch_data &lt;- rch_data %&gt;%
   filter(rch == 17) %&gt;%
