@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Overview
 
+(5 min)
+
 In post-processing part 1, we were introduced to the different SWAT output files, learned about tidy data concepts, and started importing SWAT outputs into R/RStudio. Here we will learn how to plot these data in ways that are helpful to our research.
 
 By the end of this workshop session you will be able to:
@@ -21,6 +23,8 @@ By the end of this workshop session you will be able to:
 
 
 ## 2. Importing Data
+
+(10 min)
 
 First set your working directory as we did in post-processing part 1.
 
@@ -45,7 +49,7 @@ Now let's import the raw `output.rch` file.
 ```{r import raw data, results = FALSE, echo = TRUE, message = FALSE, warning=FALSE}
 
 # You will need to change what's between the 's here. It should be output.rch.
-raw_rch_data = read_table2('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch', col_names=FALSE, skip=9)
+raw_rch_data <- read_table2('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch', col_names=FALSE, skip=9)
 
 ```
 
@@ -65,11 +69,11 @@ Ok, let's reformat these raw data a little more using the `reformat_monthly_rch_
 
 source('reformat_monthly_rch_file.R') # add the reformat_rch_file() function to our working environment
 
-rch_data = reformat_monthly_rch_file(raw_rch_data)
+rch_data <- reformat_monthly_rch_file(raw_rch_data)
 
 ```
 
-Let's look at the result now. This should be more useable/tidy! :)
+Let's look at the result now. This should be more usable/tidy! :)
 
 ``` {r look at reformatted data}
 
@@ -80,9 +84,11 @@ head(rch_data, n = 18)
 
 ## Brainstorming Plots
 
+(15 min)
+
 Activity 1:
 
-1. *(5 min on your own)* Think of some SWAT (or other model) papers you'v read. What types of figure do you always see with regards to streamflow? Hint: If you were a hydrologist, what would you absolutely want to see? How might this change depending on the time step (i.e., daily, monthly, yearly) of your data and SWAT outputs?
+1. *(5 min on your own)* Think of some SWAT (or other model) papers you've read. What types of figure do you always see with regards to streamflow? Hint: If you were a hydrologist, what would you absolutely want to see? How might this change depending on the time step (i.e., daily, monthly, yearly) of your data and SWAT outputs?
 
 2. *(5 min with a partner)* Share your figure ideas with a partner.
 
@@ -93,15 +99,16 @@ Activity 1:
 
 ![](images/no_peeking.jpg)
 
----------
 
 ## Plotting SWAT Outputs
 
-1. Plot outlet simulation data by month.
+(5 min)
+
+Example 1 - Plot outlet simulation data by month.
 ```{r}
 
 # select only outlet discharge data
-sim_outlet_rch_data = rch_data %>%
+sim_outlet_rch_data <- rch_data %>%
   filter(rch == 17) %>%
   mutate(date = paste0(month, "_", year))
 
@@ -114,14 +121,14 @@ ggplot(data = sim_outlet_rch_data, (aes(x = as.factor(month), y = flow_out_cms))
 ```
 
 
-2. Plot annual precipitation total over time.
+Example 2 - Plot annual precipitation total over time.
 ``` {r, message = FALSE}
 
 # import precip data
-monthly_precip_data = read_csv('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_input_data/precip_data/p354-775_reformatted.csv', col_names=TRUE)
+monthly_precip_data <- read_csv('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_input_data/precip_data/p354-775_reformatted.csv', col_names=TRUE)
 
 # find annual sum
-annual_precip_data = monthly_precip_data %>%
+annual_precip_data <- monthly_precip_data %>%
   group_by(year) %>%
   summarize(annual_precip_mm = sum(monthly_precip_mm))
 
@@ -134,22 +141,22 @@ ggplot(data = annual_precip_data) +
 ```
 
 
-3. Plot SWAT simulated vs observed discharge data at the outlet.
-``` {r, message = FALSE, }
+Example 3 - Plot SWAT simulated vs observed discharge data at the outlet.
+``` {r, message = FALSE }
 
 # get observed discharge data
-obs_outlet_rch_data = read_csv('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_input_data/streamflow_data/observed_monthly_outlet_flow.csv', col_names=TRUE) %>%
+obs_outlet_rch_data <- read_csv('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_input_data/streamflow_data/observed_monthly_outlet_flow.csv', col_names=TRUE) %>%
   mutate(date = paste0(month, "_", year)) %>%
   select(-month, -year)
 
 # join simulated and observed data into one table
-sim_obs_outlet_rch_data = left_join(sim_outlet_rch_data, obs_outlet_rch_data, by = "date")
+sim_obs_outlet_rch_data <- left_join(sim_outlet_rch_data, obs_outlet_rch_data, by = "date")
 
 # fit a line to the simulated vs observed data and save linear model parameters
-my_lm = lm(flow_out_cms ~ obs_flow_out_cms, data = sim_obs_outlet_rch_data)
+my_lm <- lm(flow_out_cms ~ obs_flow_out_cms, data = sim_obs_outlet_rch_data)
 #summary(my_lm) # to see this uncomment it by removing the # before summary()
-my_slope = summary(my_lm)$coef[2]
-my_intercept = summary(my_lm)$coef[1]
+my_slope <- summary(my_lm)$coef[2]
+my_intercept <- summary(my_lm)$coef[1]
 
 # plot simulated vs observed monthly discharage with 1:1 line (black) and linear model (red)
 ggplot(data = sim_obs_outlet_rch_data) +
@@ -164,7 +171,39 @@ ggplot(data = sim_obs_outlet_rch_data) +
 ```
 
 
-4. Anything else you'd like to try plotting?
+## Your Turn - Modifying Code to Plot SWAT Inputs & Outputs
+
+Activity 2:
+
+(10 min)
+
+1. *(5 min on your own)* Modify the code below (from example 1 above) to plot the range in monthly precipitation for each month. Try the bonus question below if you finish this.
+
+2. *(5 min class discussion)* Share your modification with the class.
 
 
+```{r your turn precip by month, eval = FALSE}
 
+# code from example 1 above
+ggplot(data = sim_outlet_rch_data, (aes(x = as.factor(month), y = flow_out_cms))) + 
+  geom_boxplot() +
+  xlab("Month") +
+  ylab("Monthly Avg Discharage (cms)")
+
+# don't forget to change the axes labels too!
+
+```
+
+Bonus - If you had daily data (instead of monthly data as we have here), how would you plot streamflow and precipitation together? Hint: You can use ggplot, or to make your life even easier, you can use a function in the `EcoHydRology` package (Go to Tools > Install Packages... > type in EcoHydrRology and look at the package functions in your help window).
+
+
+## Wrap up
+
+I hope you can now:
+
+1. *describe* common figures for exploring and publishing SWAT results
+
+2. *modify* R code to import and plot SWAT data
+
+
+## Please fill out a paper teaching evaluation survey for me!
