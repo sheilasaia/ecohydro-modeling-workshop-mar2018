@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Overview
 
+(5 min)
+
 Now that we have done all this work to set-up, calibrate, and validate SWAT, we can explore our results. However, before we jump into data analysis, there are a few things we need to do. First, we need to make sure  we understand the purpose of each of the 10 SWAT output files. Next, we might want to reformat these raw SWAT output files so they are easier to work with (i.e., tidy them up). Last, we have to save these reformatted outputs so we can use them for data analysis. This act of taking raw SWAT outputs, reformatting them, and saving this reformatted version is called *post-processing*.
 
 The overall goal of this workshop session is to provide you with some tools to make your post-processing of SWAT outputs easy and reproducible.
@@ -28,6 +30,8 @@ By the end of this workshop session you will be able to:
 
 Activity 1:
 
+(15 min)
+
 1. Navigate to the `TxtInOut` directory on your computer (C drive > SWAT > SWATRuns > <your SWAT project name > Scenarios > Default > TxtInOut) and, using the search bar, type in 'output'. Pull out a piece of paper and jot down the names of the different plain text files you see that start with 'output' (hint: they should only differ by their file extensions).
 
 2. *(5 min on your own)* Now that you have a list of the output.* files, head over to chapter 32 of the SWAT help manual here: http://swat.tamu.edu/media/69395/ch32_output.pdf. Read through the SWAT documentation and jot down a short summary of the information contained in each file you listed in #1.
@@ -39,6 +43,8 @@ Activity 1:
 
 ## 3. A Whirlwind Tour of RStudio
 
+(5 min)
+
 RStudio is an integrated development environment (IDE) for `R` that you can install only after you've installed `R`. Basically, RStudio makes coding in `R` easier. There are some aspects of RStudio we'll explore now.
 
 * Editor window (view and run scripts)
@@ -46,8 +52,16 @@ RStudio is an integrated development environment (IDE) for `R` that you can inst
 * Environment window (see variables in memory and view history)
 * File directory/Plot/Help window (see file path, see plots, ask for help)
 
+Other things to note:
+
+* Comment out lines using #
+* Functions live in packages
+* For `R` tutorials see Software Carpentry's online class (https://software-carpentry.org/lessons/) or R for Data Science (http://r4ds.had.co.nz/)
+
 
 ## 4. What is tidy data?
+
+(5 min)
 
 According to the [RStudio Data Wrangling Cheatsheet (click for link)...](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
 
@@ -68,6 +82,8 @@ There are other key features that make data easier for others to use:
 
 Activity 2:
 
+(15 min)
+
 1. *(5 min on your own)* Open up the `output.rch` file in your favorite text editor. How is it organized? Is it tidy? Why or why not? Write down some things you notice on a piece of paper.
 
 2. *(5 min with a partner)* Share what you found with a partner.
@@ -76,6 +92,8 @@ Activity 2:
 
 
 ## 5. Importing Data into R/RStudio
+
+(15 min)
 
 Let's try to import some of our SWAT data into R/RStudio.
 
@@ -112,7 +130,7 @@ Now let's import the `output.rch` file.
 ```{r import raw data, results = FALSE, echo = TRUE, message = FALSE}
 
 # You will need to change what's between the 's here. It should be output.rch.
-raw_rch_data = read_table('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch')
+raw_rch_data <- read_table('/Users/ssaia/Documents/GitHub/ecohydro-modeling-workshop-mar2018/data/swat_output_data/output.rch')
 
 ```
 
@@ -131,4 +149,14 @@ Hmm...it's coming in as one big column. Why do you think this is happening here?
 
 (Image credit: http://www.doctorwhotv.co.uk/)
 
+
+## 6. Wrap Up
+
+I hope you can now:
+
+1. *explain* different SWAT output files and their contents
+
+2. *identify* key features of RStudio
+
+3. *describe* key tidy data principles
 
